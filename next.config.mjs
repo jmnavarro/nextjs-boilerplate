@@ -3,7 +3,7 @@ const nextConfig = {
     async headers() {
         return [
           {
-            source: "/*",
+            source: "/webhook-handler",
             headers: [
               {
                 key: "Access-Control-Allow-Origin",
