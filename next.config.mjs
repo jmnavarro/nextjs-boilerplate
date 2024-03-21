@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
-
-module.exports = {
+const nextConfig = {
     headers: [
         ...
         {
@@ -11,4 +7,6 @@ module.exports = {
           value: '*',
         },
     ],
-}
+};
+
+export default nextConfig;
