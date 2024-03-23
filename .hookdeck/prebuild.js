@@ -109,6 +109,7 @@ async function getDestinationByUrl(api_key, destination) {
       credentials: "include",
     });
     if (response.status !== 200) {
+      console.error(`Error getting destination by url ${destination}`);
       manageResponseError(response);
       return null;
     }
@@ -205,6 +206,7 @@ async function createDestination(api_key, destination) {
       body: JSON.stringify(data),
     });
     if (response.status !== 200) {
+      console.error(`Error creating destination ${destination}`);
       console.error(JSON.stringify(data));
       manageResponseError(response);
       return null;
