@@ -389,22 +389,19 @@ async function checkPrebuild() {
           return false;
         }
     
-        const source_name = conn_config.source_name;
-        const destination_url = `https://${process.env.VERCEL_URL}`;
-    
-        let source = await getSourceByName(api_key, source_name);
+        let source = await getSourceByName(api_key, conn_config.source_name);
         let shouldCreateConnection = false;
     
         // TODO: this is not transactional. Create cleaup-rollback mechanism?
     
         if (!source) {
-          source = await createSource(api_key, source_name);
+          source = await createSource(api_key, conn_config.source_name);
           shouldCreateConnection = true;
         }
 
-        let destination = await getDestinationByUrl(api_key, destination_url);
+        let destination = await getDestinationByUrl(api_key, conn_config.destination_url);
         if (!destination) {
-          destination = await createDestination(api_key, destination_url);
+          destination = await createDestination(api_key, conn_config.destination_url);
           shouldCreateConnection = true;
         }
     
