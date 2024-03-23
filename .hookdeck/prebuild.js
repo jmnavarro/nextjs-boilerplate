@@ -289,15 +289,18 @@ async function saveCurrentConfig(config) {
 }
 
 function readMiddlewareFile(basePath) {
-  const extensions = [".js", ".mjs", ".ts"]; // Add more if needed
+  const extensions = ["js", "mjs", "ts"]; // Add more if needed
   for (let ext of extensions) {
-    const filePath = `${basePath}${ext}`;
+    const filePath = `${basePath}.${ext}`;
     try {
       const middlewareSourceCode = fs.readFileSync(filePath, "utf-8");
-      if (!!middlewareSourceCode) {
+      console.log(`Read ${filePath}: ${middlewareSourceCode}`);
+      if (middlewareSourceCode) {
         const purgedCode = middlewareSourceCode.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, ""); // removes al comments. May mess with http:// bars but doesn't matter here.
         if (purgedCode.length > 0) {
           return purgedCode;
+        } else {
+          console.warn(`File ${filePath} is empty`);
         }
       }
     } catch (error) {
@@ -315,6 +318,7 @@ function validateMiddleware() {
     console.warn(
       `Middleware file not found. Consider removing ${LIBRARY_NAME} from your dev dependencies if you are not using it.`
     );
+    return;
   }
 
   // 2) Check if library is used in middleware.
