@@ -266,7 +266,7 @@ function manageResponseError(response, isFromHookdeck = true) {
   process.exit(1);
 }
 
-async function saveCurrentConfig(config) {
+function saveCurrentConfig(config) {
   // Save the current config to a file just for debugging and information purposes.
   // This is actually not needed for the wrapper to work
   try {
@@ -275,16 +275,12 @@ async function saveCurrentConfig(config) {
       `${appRoot}/.hookdeck`,
       "hookdeck.current.json"
     );
-    const checkFileExists = async (path) => !!(await fs.stat(path).catch(e => false));
-    if (!await checkFileExists(destDir)) {
-      await fs.mkdir(destDir, { recursive: true });
+
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(destDir, { recursive: true });
     }
-    const json = JSON.stringify(
-      config,
-      null,
-      2
-    );
-    await fs.writeFile(destinationPath, json, "utf-8");
+    const json = JSON.stringify(config, null, 2);
+    fs.writeFileSync(destinationPath, json, "utf-8");
   } catch (e) {
     manageError(e);
   }
@@ -436,7 +432,7 @@ async function checkPrebuild() {
         );
     }
 
-    await saveCurrentConfig({ connections: env_configs });
+    saveCurrentConfig({ connections: env_configs });
 
     console.log("Hookdeck successfully configured");
     return true;
