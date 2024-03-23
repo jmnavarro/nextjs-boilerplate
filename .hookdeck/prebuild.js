@@ -3,6 +3,7 @@ const fs = require("fs");
 const { customAlphabet } = require("nanoid");
 const path = require('path');
 const { exit } = require("process");
+const hookdeckConfig = require("../hookdeck.config");
 
 
 const LIBRARY_NAME = 'vercel-integration-demo';
@@ -333,24 +334,24 @@ function validateMiddleware() {
 }
 
 function validateHookdeckJson() {
-  const hookdeckFilePath = `${appRoot}/hookdeck.json`;
+  const hookdeckFilePath = `${appRoot}/hookdeck.config.js`;
   try {
     const hookdeckConfigSourceCode = fs.readFileSync(hookdeckFilePath, "utf-8");
     if (!hookdeckConfigSourceCode) {
-      console.error("hookdeck.json file not found in the project root");
+      console.error("hookdeck.config.js file not found in the project root");
       return null;
     }
 
     const hookdeckConfig = JSON.parse(hookdeckConfigSourceCode);
     if (!hookdeckConfig) {
-      console.error("hookdeck.json is not a valid JSON file");
+      console.error("hookdeck.config.js is not a valid JS file");
       return null;
     }
 
-    console.log(`hookdeck.json found`);
+    console.log(`hookdeck.config.js found`);
     return hookdeckConfig;
   } catch (error) {
-    console.error("hookdeck.json is not a valid JSON file");
+    console.error("hookdeck.config.js is not a valid JSON file");
   }
 
   return null;
@@ -360,25 +361,27 @@ async function checkPrebuild() {
   try {
     validateMiddleware();
 
-    const hookdeckConfig = validateHookdeckJson();
     if (!hookdeckConfig) {
-      return false;
+      console.error(
+        `Usage of ${LIBRARY_NAME} detected but hookdeck.config.js could not be imported. Please follow the steps in ${TUTORIAL_URL} to export the hookdeckConfig object`
+      );
+      return false;      
     }
-  
+    
     const validConfigFileResult = validateConfig(hookdeckConfig);
     if (!validConfigFileResult.ok) {
       console.error(validConfigFileResult.msg);
       return false;
     }
 
-    console.log('hookdeck.json validated successfully');
+    console.log('hookdeck.config.js validated successfully');
 
     const env_configs = [];
     for (const conn_config of hookdeckConfig.connections) {
         const api_key = conn_config.api_key ?? process.env.HOOKDECK_API_KEY;
         if (!api_key) {
           console.error(
-            `Hookdeck's API key doesn't found. You must set it as a env variable named HOOKDECK_API_KEY or include it in your hookdeck.json. Check ${TUTORIAL_URL} for more info.`
+            `Hookdeck's API key doesn't found. You must set it as a env variable named HOOKDECK_API_KEY or include it in your hookdeck.config.js. Check ${TUTORIAL_URL} for more info.`
           );
           return false;
         }
