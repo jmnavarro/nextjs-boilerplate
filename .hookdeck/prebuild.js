@@ -103,7 +103,6 @@ async function getDestinationByUrl(api_key, destination) {
       method: "GET",
       mode: "cors",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${api_key}`,
       },
       credentials: "include",
@@ -407,7 +406,7 @@ async function checkPrebuild() {
           shouldCreateConnection = true;
         }
 
-        let destination = await getDestinationByUrl(api_key, destination_url);
+        let destination = await getDestinationByUrl(api_key, `https://${destination_url}`);
         if (!destination) {
           destination = await createDestination(api_key, destination_url);
           shouldCreateConnection = true;
