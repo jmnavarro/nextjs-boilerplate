@@ -394,7 +394,7 @@ async function checkPrebuild() {
         }
     
         const source_name = conn_config.source_name;
-        const destination_url = process.env.VERCEL_URL;
+        const destination_url = `https://${process.env.VERCEL_URL}`;
     
         let source = await getSourceByName(api_key, source_name);
         let shouldCreateConnection = false;
@@ -406,7 +406,7 @@ async function checkPrebuild() {
           shouldCreateConnection = true;
         }
 
-        let destination = await getDestinationByUrl(api_key, `https://${destination_url}`);
+        let destination = await getDestinationByUrl(api_key, destination_url);
         if (!destination) {
           destination = await createDestination(api_key, destination_url);
           shouldCreateConnection = true;
