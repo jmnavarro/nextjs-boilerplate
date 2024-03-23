@@ -1,5 +1,5 @@
 const appRoot = require("app-root-path");
-const fs = require("fs").promises;
+const fs = require("fs");
 const { customAlphabet } = require("nanoid");
 const path = require('path');
 const { exit } = require("process");
@@ -339,6 +339,7 @@ function validateHookdeckJson() {
   const hookdeckFilePath = `${appRoot}/hookdeck.json`;
   try {
     const hookdeckConfigSourceCode = fs.readFileSync(hookdeckFilePath, "utf-8");
+    console.log(`Config: ${hookdeckConfigSourceCode}`);
     if (!hookdeckConfigSourceCode) {
       console.error("hookdeck.json file not found in the project root");
       return null;
