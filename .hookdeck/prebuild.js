@@ -96,9 +96,9 @@ async function getSourceByName(api_key, source_name) {
   }
 }
 
-async function getDestinationByUrl(api_key, url) {
+async function getDestinationByUrl(api_key, destination) {
   try {
-    const url = `${HOOKDECK_API_URL}/${API_VERSION}/destinations?url=${encodeURI(url)}`;
+    const url = `${HOOKDECK_API_URL}/${API_VERSION}/destinations?url=${encodeURI(destination)}`;
     const response = await fetch(url, {
       method: "GET",
       mode: "cors",
