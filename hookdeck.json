@@ -1,0 +1,9 @@
+{
+  "connections": [
+    {
+      "source_name": "from-vercel",
+      "match_path": "/webhook-handler",
+      "api_key": "4rzpinn4gjfj1hxhlpc63ufhbeenrhq2z6y2bkwxqycnrhjvd5"
+    }
+  ]
+}
