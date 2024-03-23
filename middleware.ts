@@ -3,8 +3,6 @@ import type { NextRequest } from 'next/server'
 import { withHookdeck } from 'vercel-integration-demo'
 import hookdeckConfig from './hookdeck.config'
 
-console.log(hookdeckConfig);
-
 export const config = {
   matcher: '/webhook-handler',
 };
