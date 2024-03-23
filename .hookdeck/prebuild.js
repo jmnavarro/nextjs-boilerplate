@@ -53,9 +53,9 @@ function validateConfig(config) {
   const string_props = ["source_name", "match_path"];
   let index = 0;
 
-  for(const config of config.connections) {
+  for(const conn of config.connections) {
     for (const prop of string_props) {
-        if (!isValidPropertyValue(config[prop])) {
+        if (!isValidPropertyValue(conn[prop])) {
           msgs.push(`connections[${index}]: Undefined or invalid value for key ${prop} in configuration file at hookdeck.config.js`)
           valid = false;
         }
@@ -294,7 +294,6 @@ function readMiddlewareFile(basePath) {
     const filePath = `${basePath}.${ext}`;
     try {
       const middlewareSourceCode = fs.readFileSync(filePath, "utf-8");
-      console.log(`Read ${filePath}: ${middlewareSourceCode}`);
       if (middlewareSourceCode) {
         const purgedCode = middlewareSourceCode.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, ""); // removes al comments. May mess with http:// bars but doesn't matter here.
         if (purgedCode.length > 0) {
@@ -339,7 +338,6 @@ function validateHookdeckJson() {
   const hookdeckFilePath = `${appRoot}/hookdeck.json`;
   try {
     const hookdeckConfigSourceCode = fs.readFileSync(hookdeckFilePath, "utf-8");
-    console.log(`Config: ${hookdeckConfigSourceCode}`);
     if (!hookdeckConfigSourceCode) {
       console.error("hookdeck.json file not found in the project root");
       return null;
