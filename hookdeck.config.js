@@ -56,16 +56,6 @@ module.exports = {
       destination_config: {
         rate_limit: 100,
         rate_limit_period: "hour",
-        auth_method: {
-          type: "OAUTH2_AUTHORIZATION_CODE",
-          config: {
-            client_id: "test_client_id",
-            client_secret: "test_client_secret",
-            refresh_token: "test_refresh_token",
-            scope: "",
-            auth_server: "http://auth_server",
-          },
-        },
       },
     },
   ],
