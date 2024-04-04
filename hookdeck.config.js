@@ -34,29 +34,5 @@ module.exports = {
         },
       },
     },
-    {
-      source_name: "from-vercel-v033-2",
-      destination_url: "https://nextjs-boilerplate-eta-five-30.vercel.app/webhook-handler-2",
-      match_path: "/webhook-handler-2",
-      rules: [
-        {
-          type: "retry",
-          interval: 60000,
-          count: 20,
-          strategy: "exponential",
-        },
-      ],
-      source_config: {
-        allowed_http_methods: ["POST", "GET", "PUT", "DELETE", "PATCH"],
-        custom_response: {
-          content_type: "json",
-          body: '{"message":"Hello World, but updated"}',
-        },
-      },
-      destination_config: {
-        rate_limit: 100,
-        rate_limit_period: "hour",
-      },
-    },
   ],
 };
