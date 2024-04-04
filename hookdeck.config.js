@@ -36,8 +36,8 @@ module.exports = {
     },
     {
       source_name: "from-vercel-v033-2",
-      destination_url: "https://nextjs-boilerplate-eta-five-30.vercel.app/webhook-handler",
-      match_path: "/webhook-handler",
+      destination_url: "https://nextjs-boilerplate-eta-five-30.vercel.app/webhook-handler-2",
+      match_path: "/webhook-handler-2",
       rules: [
         {
           type: "retry",
