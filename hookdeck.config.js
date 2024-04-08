@@ -3,6 +3,8 @@
 module.exports = {
   'from-vercel-v035': {
     match: '/webhook-handler',
+    url: 'https://nextjs-boilerplate-eta-five-30.vercel.app/webhook-handler',
+
 /*
     // all fields below this line are optional:
     host: '',
