@@ -7,7 +7,7 @@ export const config = {
 };
  
 export default function middleware(request: Request, ctx: NextFetchEvent) {
-  console.log(`Middleware call from ${request.url.toString()}`); 
+  console.log(`Middleware call from ${request.url.toString()}: host=${process.env.VERCEL_URL}`); 
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('user-agent', 'New User Agent overriden by middleware!')
