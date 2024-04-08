@@ -207,7 +207,7 @@ function manageResponseError(response, isFromHookdeck = true) {
 function saveCurrentConfig({ connections }) {
   // Updates the hookdeck.config.js file with the current connection ids
   try {
-    const destinationPath = path.join(`${appRoot}`, `hookdeck.config.js`);
+    const destinationPath = path.join(appRoot, `hookdeck.config.js`);
 
     const hookdeckConfig = connections.map((conn) => (
       Object.assign(conn, {
@@ -220,21 +220,6 @@ function saveCurrentConfig({ connections }) {
     const text = `module.exports = ${content};`;
     fs.writeFileSync(destinationPath, text, 'utf-8');
     console.log('Saved hookdeck.config.js', text);
-  } catch (e) {
-    manageError(e);
-  }
-
-  // Save the current config to a file just for debugging and information purposes.
-  // This is actually not needed for the wrapper to work
-  try {
-    const destDir = `${appRoot}/.hookdeck`;
-    const destinationPath = path.join(`${appRoot}/.hookdeck`, 'hookdeck.current.json');
-
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(destDir, { recursive: true });
-    }
-    const json = JSON.stringify(config, null, 2);
-    fs.writeFileSync(destinationPath, json, 'utf-8');
   } catch (e) {
     manageError(e);
   }
