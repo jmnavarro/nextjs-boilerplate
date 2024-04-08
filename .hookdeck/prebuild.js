@@ -72,7 +72,7 @@ async function checkPrebuild() {
         }
       }
       env_configs.push({
-        connection: connection,
+        connection,
         config: conn_config,
       });
 
@@ -206,13 +206,15 @@ function manageResponseError(response, isFromHookdeck = true) {
 
 function saveCurrentConfig(config) {
   // Updates the hookdeck.config.js file with the current connection ids
+  console.log('Saving hookdeck.config.js', config);
   try {
     const destinationPath = path.join(`${appRoot}`, `hookdeck.config.js`);
 
     const connections = Object.entries(config).map((e) => {
       const source_name = e[0];
-      const val = e[1];
-      return Object.assign(val, { source_name: source_name, id: e.connection.id });
+      const conn = e[1];
+      console.log(source_name, conn);
+      return Object.assign(conn, { source_name, id: e.connection.id });
     });
 
     const content = JSON.stringify({ connections }, null, 2);
