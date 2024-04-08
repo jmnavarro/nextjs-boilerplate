@@ -112,7 +112,7 @@ function isString(str) {
 function validateConfig(connections) {
   let valid = true;
   let msgs = [];
-  const string_props = ['source_name', 'match', 'host'];
+  const string_props = ['source_name', 'match'];
   let index = 0;
 
   for (const conn of connections) {

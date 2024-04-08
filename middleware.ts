@@ -2,11 +2,16 @@ import { NextResponse } from 'next/server'
 import { NextFetchEvent } from 'next/server'
 // import type { NextRequest } from 'next/server'
 
+// add hookdeck imports
+import { withHookdeck } from "vercel-integration-demo";
+import hookdeckConfig from "./hookdeck.config";
+
+
 export const config = {
   matcher: '/webhook-handler',
 };
  
-export default function middleware(request: Request, ctx: NextFetchEvent) {
+function middleware(request: Request, ctx: NextFetchEvent) {
   console.log(`Middleware call from ${request.url.toString()}`); 
 
   const requestHeaders = new Headers(request.headers);
@@ -18,3 +23,6 @@ export default function middleware(request: Request, ctx: NextFetchEvent) {
     },
   });  
 }
+
+// wrap the middleware with hookdeck wrapper
+export default withHookdeck(hookdeckConfig, middleware);
