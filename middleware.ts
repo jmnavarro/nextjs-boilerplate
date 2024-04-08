@@ -12,7 +12,15 @@ export const config = {
 };
  
 function middleware(request: Request, ctx: NextFetchEvent) {
-  console.log(`Middleware call from ${request.url.toString()}`); 
+  console.log(`Middleware call from ${request.url.toString()}`);
+
+  if (request.method === 'POST') {
+    console.log(`Return JSON and stop here`);
+    return new Response(JSON.stringify({ from: 'middleware' }), {
+      status: 200,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('user-agent', 'New User Agent overriden by middleware!')
