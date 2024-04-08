@@ -204,18 +204,18 @@ function manageResponseError(response, isFromHookdeck = true) {
   process.exit(1);
 }
 
-function saveCurrentConfig(config) {
+function saveCurrentConfig({ connections }) {
   // Updates the hookdeck.config.js file with the current connection ids
-  console.log('Saving hookdeck.config.js', config);
+  console.log('Saving hookdeck.config.js', connections);
   try {
     const destinationPath = path.join(`${appRoot}`, `hookdeck.config.js`);
 
-    const connections = Object.entries(config).map((e) => {
-      const source_name = e[0];
-      const conn = e[1];
-      console.log(source_name, conn);
-      return Object.assign(conn, { source_name, id: e.connection.id });
-    });
+    const connections = connections.map((conn) => (
+      Object.assign(conn, {
+        source_name: conn.config.source_name, 
+        id: conn.connection.id,
+      })
+    ));
 
     const content = JSON.stringify({ connections }, null, 2);
     const text = `module.exports = ${content};`;
