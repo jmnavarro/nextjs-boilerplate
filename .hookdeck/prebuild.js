@@ -134,14 +134,25 @@ function validateConfig(connections) {
   };
 }
 
-async function autoCreateConnection(api_key, config) {
+function getDestinationUrl(config) {
   const dest_url = config.url || config.host || `https://${process.env.VERCEL_BRANCH_URL}`;
+  return dest_url.endsWith('/') ? dest_url.substring(0, dest_url.length - 1) : dest_url;
+}
 
-  config.path_forwarding_disabled =
-      !!config.url ? true : (!!config.host ? false : config.path_forwarding_disabled);
-  const clean_url = dest_url.endsWith('/') ? dest_url.substring(0, dest_url.length - 1) : dest_url;
-  const valueToHash = `${config.source_name}*${clean_url}*${config.match}`;
-  const connection_name = createHash('sha256').update(valueToHash).digest('hex');
+function getConnectionName(config) {
+  const dest_url = getDestinationUrl(config);
+  const valueToHash = `${config.source_name}*${dest_url}*${config.match}`;
+  return createHash('sha256').update(valueToHash).digest('hex');
+}
+
+async function autoCreateConnection(api_key, config) {
+  if (!config.path_forwarding_disabled) {
+    // if they set a specific url, path forwarding is disabled by default
+    config.path_forwarding_disabled = !!config.url ? true : false;
+  }
+
+  const connection_name = getConnectionName(config);
+  const dest_url = getDestinationUrl(config);
 
   let data = {
     name: connection_name,
@@ -258,6 +269,9 @@ function manageResponseError(response, isFromHookdeck = true) {
 
 function saveCurrentConfig({ connections }) {
   // Updates the hookdeck.config.js file with the current connection ids
+  //
+  // TODO instead of overwriting `hookdeck.config.js`, create a new file called
+  // `hookdeck.config.lock.js` and use it from the wrapper.
   try {
     const destinationPath = path.join(`${appRoot}`, `hookdeck.config.js`);
 
