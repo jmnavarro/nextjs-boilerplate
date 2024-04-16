@@ -3,8 +3,8 @@ import { NextFetchEvent } from 'next/server'
 // import type { NextRequest } from 'next/server'
 
 // add hookdeck imports
-import { withHookdeck } from "vercel-integration-demo";
-import hookdeckConfig from "./hookdeck.config";
+//import { withHookdeck } from "vercel-integration-demo";
+//import hookdeckConfig from "./hookdeck.config";
 
 
 export const config = {
@@ -33,4 +33,5 @@ function middleware(request: Request, ctx: NextFetchEvent) {
 }
 
 // wrap the middleware with hookdeck wrapper
-export default withHookdeck(hookdeckConfig, middleware);
+//export default withHookdeck(hookdeckConfig, middleware);
+export default middleware;
