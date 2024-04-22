@@ -3,7 +3,14 @@
 export const dynamic = 'force-dynamic'; // static by default, unless reading the request
  
 export function POST(request: Request) {
-    return new Response(JSON.stringify({ from: `function from ${process.env.VERCEL_REGION}`}), {
+    return new Response(JSON.stringify({ from: `POST function from ${process.env.VERCEL_REGION}`}), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+    });
+}
+
+export function PUT(request: Request) {
+    return new Response(JSON.stringify({ from: `PUT function from ${process.env.VERCEL_REGION}`}), {
         status: 200,
         headers: { 'content-type': 'application/json' },
     });
