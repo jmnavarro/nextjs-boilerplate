@@ -11,7 +11,7 @@ export const config = {
   matcher: '/webhook-handler',
 };
  
-function middleware(request: Request, ctx: NextFetchEvent) {
+async function middleware(request: Request, ctx: NextFetchEvent) {
   console.log(`Middleware call from ${request.url.toString()}`);
 
   if (request.method === 'POST') {
