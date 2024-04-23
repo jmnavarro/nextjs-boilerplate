@@ -3,11 +3,7 @@
 module.exports = {
   match: {
     '/webhook-handler': {
-      retry: {
-        strategy: 'exponential',
-        count: 10,
-        interval: 3600,
-      },
+      delay: 1000,
     },
   }
 };
