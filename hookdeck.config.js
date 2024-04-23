@@ -2,6 +2,12 @@
 
 module.exports = {
   match: {
-    '/webhook-handler': {},
+    '/webhook-handler': {
+      retry: {
+        strategy: 'exponential',
+        count: 10,
+        interval: 3600,
+      },
+    },
   }
 };
