@@ -1,5 +1,9 @@
 import { next } from '@vercel/edge';
 
+import { withHookdeck } from "@hookdeck/vercel";
+import hookdeckConfig from "./hookdeck.config";
+
+
 export const config = {
   matcher: '/webhook-handler',
 };
@@ -19,4 +23,4 @@ async function middleware(request: Request) {
   return next();
 }
 
-export default middleware;
+export default withHookdeck(hookdeckConfig, middleware);
