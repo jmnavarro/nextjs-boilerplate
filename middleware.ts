@@ -1,4 +1,4 @@
-import { next } from '@vercel/edge'
+import { next } from '@vercel/edge';
 
 export const config = {
   matcher: '/webhook-handler',
