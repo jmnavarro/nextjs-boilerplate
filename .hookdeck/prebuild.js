@@ -73,7 +73,7 @@ async function checkPrebuild() {
               if (connection) {
                 connection = await updateConnection(
                   conn_config.api_key,
-                  Object.assign({ connection_id }, conn_config),
+                  Object.assign({ connection_id: connection.id }, conn_config),
                 );
               }
             }
