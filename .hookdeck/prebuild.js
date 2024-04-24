@@ -57,7 +57,7 @@ async function checkPrebuild() {
         if (cached_connection_id) {
           connection = await updateConnection(
             conn_config.api_key,
-            Object.assign({ connection_id: cached_connection_id }, conn_config),
+            Object.assign({ id: cached_connection_id }, conn_config),
           );
         } else {
           const source = await getSourceByName(conn_config.api_key, conn_config.source_name);
@@ -73,7 +73,7 @@ async function checkPrebuild() {
               if (connection) {
                 connection = await updateConnection(
                   conn_config.api_key,
-                  Object.assign({ connection_id: connection.id }, conn_config),
+                  Object.assign({ id: connection.id }, conn_config),
                 );
               }
             }
