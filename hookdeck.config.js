@@ -18,9 +18,6 @@ const hookdeckConfig = {
           headers: {
             'x-my-header': 'my-value',
           },
-          body: {},
-          query: {},
-          path: {},
         },
       ],
       rate: {
