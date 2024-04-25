@@ -34,7 +34,7 @@ const hookdeckConfig = {
       },
 
       custom_response: {
-        contentType: SourceCustomResponseContentType.Json,
+        content_type: SourceCustomResponseContentType.Json,
         body: '{"message": "Vercel handled the webhook using Hookdeck"}',
       },
     },
