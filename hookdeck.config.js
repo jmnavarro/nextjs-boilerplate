@@ -22,7 +22,7 @@ const hookdeckConfig = {
       ],
       rate: {
         limit: 10,
-        period: DestinationRateLimitPeriod.Seconds,
+        period: DestinationRateLimitPeriod.Concurrent,
       },
 
       verification: {
