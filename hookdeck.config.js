@@ -1,3 +1,8 @@
+const {
+  RetryStrategy,
+  DestinationRateLimitPeriod,
+  SourceCustomResponseContentType,
+} = require('@hookdeck/sdk/api');
 
 const hookdeckConfig = {
   match : {
