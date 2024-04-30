@@ -1,9 +1,9 @@
 // Hookdeck SDK is a dependency of Hookdeck Vercel Middleware.
-// const {
-//   RetryStrategy,
-//   DestinationRateLimitPeriod,
-//   SourceCustomResponseContentType,
-// } = require('@hookdeck/sdk/api');
+const {
+  RetryStrategy,
+  DestinationRateLimitPeriod,
+  SourceCustomResponseContentType,
+} = require('@hookdeck/sdk/api');
 
 /** @type {import("@hookdeck/vercel").HookdeckConfig} */
 const hookdeckConfig = {
