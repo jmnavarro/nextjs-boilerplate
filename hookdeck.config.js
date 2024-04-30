@@ -11,7 +11,7 @@ const hookdeckConfig = {
   match: {
     '/webhook-handler': {
       retry: {
-        strategy: RetryStrategy.Linear,
+        strategy: RetryStrategy.Exponential,
         count: 5,
         interval: 1 * 60 * 1000, // in milliseconds
       },
