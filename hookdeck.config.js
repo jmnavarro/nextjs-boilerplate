@@ -9,7 +9,7 @@ const {
 const hookdeckConfig = {
   // vercel_url: '', // optional. Uses `VERCEL_BRANCH_URL` env var as default.
   match: {
-    '/api/webhooks': {
+    '/webhook-handler': {
       retry: {
         strategy: RetryStrategy.Linear,
         count: 5,
