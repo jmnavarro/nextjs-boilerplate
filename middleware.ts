@@ -1,7 +1,8 @@
 import { next } from '@vercel/edge';
 
 //import { withHookdeck } from "@hookdeck/vercel";
-//import hookdeckConfig from "./hookdeck.config";
+import { withHookdeck } from "vercel-integration-demo";
+import hookdeckConfig from "./hookdeck.config";
 
 
 export const config = {
@@ -24,4 +25,5 @@ async function middleware(request: Request) {
 }
 
 //export default withHookdeck(hookdeckConfig, middleware);
-export default middleware;
+export default withHookdeck(hookdeckConfig);
+//export default middleware;
